@@ -2,6 +2,8 @@ FROM debian:stretch
 ARG VERSION=latest
 MAINTAINER Tristan Teufel <info@teufel-it.de>
 
+LABEL update="2019-11-14" 
+
 RUN apt-get update
 RUN apt-get install sqlite3 libcrypto++6 libcurl3 libfuse2 wget btrfs-tools -y
 
