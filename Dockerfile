@@ -1,16 +1,15 @@
 FROM debian:buster
-ARG VERSION=2.4.11
+ARG VERSION=latest
 MAINTAINER Tristan Teufel <info@teufel-it.de>
 
-LABEL update="2019-11-14" 
+LABEL update="2020-03-29"
 
 RUN apt-get update
-RUN apt-get upgrade
 RUN apt-get install sqlite3 libcrypto++6 libcurl4 libfuse2 wget btrfs-tools -y
 
 RUN if [ "${VERSION}" = "latest" ] ; then \
-    LATEST=$(wget https://hndl.urbackup.org/Server/latest/debian/stretch/ -q -O - | tr '\n' '\r' | sed -r 's/.*server_([0-9\.]+)_amd64\.deb.*/\1/') && \
-    wget -O /root/urbackup.deb https://hndl.urbackup.org/Server/latest/debian/stretch/urbackup-server_${LATEST}_amd64.deb; \
+    LATEST=$(wget https://hndl.urbackup.org/Server/latest/debian/buster/ -q -O - | tr '\n' '\r' | sed -r 's/.*server_([0-9\.]+)_amd64\.deb.*/\1/') && \
+    wget -O /root/urbackup.deb https://hndl.urbackup.org/Server/latest/debian/buster/urbackup-server_${LATEST}_amd64.deb; \
     else wget -O /root/urbackup.deb https://www.urbackup.org/downloads/Server/${VERSION}/debian/buster/urbackup-server_${VERSION}_amd64.deb; \
     fi
 
@@ -30,3 +29,4 @@ HEALTHCHECK  --interval=5m --timeout=3s \
 VOLUME [ "/var/urbackup", "/var/log", "/backup"]
 ENTRYPOINT ["/usr/bin/urbackupsrv"]
 CMD ["run"]
+
