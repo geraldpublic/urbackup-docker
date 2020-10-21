@@ -1,8 +1,8 @@
 FROM debian:buster
 ARG VERSION=latest
-MAINTAINER Tristan Teufel <info@teufel-it.de>
+MAINTAINER Tristan Teufel <info@teufel-it.de> / Gerald Brunner
 
-LABEL update="2020-06-17"
+LABEL update="2020-10-21"
 
 RUN apt-get update
 RUN apt-get install sqlite3 libcrypto++6 libcurl4 libfuse2 wget btrfs-tools -y
